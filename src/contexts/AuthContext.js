@@ -30,8 +30,16 @@ export function AuthProvider({ children}) {
      return auth.sendPasswordResetEmail(email)
  }
 
+ function updateEmail(email) {
+    return auth.currentUser.updateEmail(email)
+ }
 
- useEffect(()=>{
+ function updatePassword(password) {
+    return auth.currentUser.updatePassWord(password)
+ }
+
+//firebase uses tokens for you 
+ useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
         setCurrentUser(user)
         setLoading(false) 
@@ -45,7 +53,9 @@ export function AuthProvider({ children}) {
         signup, 
         login, 
         logout,
-        resetPassword
+        resetPassword,
+        updateEmail,
+        updatePassword
     }
 
     return (
